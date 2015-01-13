@@ -9,16 +9,20 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
 /**
  *
- * @author Greyhound
+ * @author Zack Hoffmann
  */
 @WebSocket
 public class ChatSocket {
     
     @OnWebSocketMessage
     public void onMessage(Session ses, String msg) {
-        Logger.getLogger(ChatSocket.class.getName()).log(Level.INFO, msg);
         try {
+            
+            Logger.getLogger(ChatSocket.class.getName()).log(Level.FINE, msg);
+            // TODO Gson msg into Message object
+            
             ses.getRemote().sendString(msg);
+            
         } catch (IOException ex) {
             Logger.getLogger(ChatSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
