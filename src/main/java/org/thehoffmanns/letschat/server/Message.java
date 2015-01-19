@@ -1,31 +1,45 @@
 package org.thehoffmanns.letschat.server;
 
+import java.util.UUID;
+
 public class Message {
 
-    private static final String KEEP_ALIVE = "KAL";
-    private static final String OPEN = "OPN";
-    private static final String STANDARD = "STD";
-    private static final String ACKNOWLEDGE = "ACK";
-    private static final String CLOSE = "CLS";
+    public static enum MessageType {
+        KEEP_ALIVE("KAL"),
+        OPEN("OPN"),
+        TRANSMIT("TRS"),
+        ACKNOWLEDGE("ACK"),
+        CLOSE("CLS");
+        
+        private String code;
+        private MessageType(String code) {
+            this.code = code;
+        }
+        
+        @Override
+        public String toString() {
+            return code;
+        }
+    }
 
-    private String type;
-    private String sessionId;
+    private MessageType type;
+    private UUID sessionId;
     private long sequenceNum;
     private String body;
 
-    public String getType() {
+    public MessageType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(MessageType type) {
         this.type = type;
     }
 
-    public String getSessionId() {
+    public UUID getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(String sessionId) {
+    public void setSessionId(UUID sessionId) {
         this.sessionId = sessionId;
     }
 
